@@ -1,3 +1,6 @@
 node_modules/
 .env
 upload/
+yarn.lock
+package.json
+yarn-error
