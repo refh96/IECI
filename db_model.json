@@ -1,4 +1,34 @@
 {
+    "Arrendatario": {
+        "nombre": {
+            "type": "String",
+            "required": true
+        },
+        "apellido": {
+            "type": "String",
+            "required": true
+        },
+        "número": {
+            "type": "Number",
+            "required": true
+        },
+        "correo": {
+            "type":"String",
+            "required": true
+        },
+        "lugar": {
+            "type": "Schema.ObjectID",
+            "ref": "Lugar"
+        },
+        "category": {
+            "type": "Schema.ObjectID",
+            "ref": "Category"
+        },
+        "status": {
+            "type": "Schema.ObjectID",
+            "ref": "Status"
+        }
+    },
     "products": {
         "name": {
             "type": "String",
