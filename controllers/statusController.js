@@ -1,7 +1,7 @@
 const Status = require('../models/status');
-const Product = require('../models/product');
+const Arrendatario = require('../models/arrendatario');
 
-const createStatus = async (req, res) => {
+const createStatus =  (req, res) => {
     const { name } = req.body;
     const { id } = req.params
     const newStatus = new Status({ name });
@@ -9,19 +9,19 @@ const createStatus = async (req, res) => {
         if (err) {
             return res.status(400).send({ message: 'Error al crear el estado' });
         }
-        Product.updateOne({ _id: id }, { $push: { status: status._id } }, (err, product) => {
+        Arrendatario.updateOne({ _id: id }, { $push: { status: status._id } }, (err, arrendatario) => {
             if (err) {
                 return res.status(400).send({ message: 'Error al crear el estado' });
             }
-            if (!product) {
-                return res.status(404).send({ message: 'No se encontró el producto' });
+            if (!arrendatario) {
+                return res.status(404).send({ message: 'No se encontró el arrendatario' });
             }
             return res.status(201).send(status);
         })
     })
 }
 
-const getStatuses = async (req, res) => {
+const getStatuses = (req, res) => {
     Status.find({}, (err, status) => {
         if (err) {
             return res.status(400).send({ message: 'Error al obtener los estados' });
@@ -30,7 +30,7 @@ const getStatuses = async (req, res) => {
     })
 }
 
-const getStatus = async (req, res) => {
+const getStatus = (req, res) => {
     const { id } = req.params;
     Status.findById(id, (err, status) => {
         if (err) {
@@ -43,7 +43,7 @@ const getStatus = async (req, res) => {
     })
 }
 
-const updateStatus = async (req, res) => {
+const updateStatus = (req, res) => {
     const { name } = req.body;
     const { id } = req.params;
     Status.findOneAndUpdate(id, { name }, (err, status) => {
@@ -57,7 +57,7 @@ const updateStatus = async (req, res) => {
     })
 }
 
-const deleteStatus = async (req, res) => {
+const deleteStatus = (req, res) => {
     const { id } = req.params;
     Status.findOneAndDelete(id, (err, status) => {
         if (err) {

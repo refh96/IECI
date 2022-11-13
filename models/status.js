@@ -5,8 +5,8 @@ const statusSchema = new Schema({
         type: String,
         required: true,
         enum: [
-            'Disponible',
-            'Agotado'
+            'Permitido',
+            'Bloqueado'
         ]
     }
 })
