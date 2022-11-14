@@ -32,7 +32,7 @@ const ArrendatarioSchema = new Schema({
         ref: 'category'
     },*/
     status: {
-        type:Schema.ObjectId,
+        type: Schema.ObjectId,
         ref: 'status'
     }
 });

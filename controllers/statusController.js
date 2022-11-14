@@ -1,7 +1,7 @@
 const Status = require('../models/status');
 const Arrendatario = require('../models/arrendatario');
 
-const createStatus =  (req, res) => {
+const createStatus = async (req, res) => {
     const { name } = req.body;
     const { id } = req.params
     const newStatus = new Status({ name });
@@ -21,7 +21,7 @@ const createStatus =  (req, res) => {
     })
 }
 
-const getStatuses = (req, res) => {
+const getStatuses = async (req, res) => {
     Status.find({}, (err, status) => {
         if (err) {
             return res.status(400).send({ message: 'Error al obtener los estados' });
@@ -30,7 +30,7 @@ const getStatuses = (req, res) => {
     })
 }
 
-const getStatus = (req, res) => {
+const getStatus = async (req, res) => {
     const { id } = req.params;
     Status.findById(id, (err, status) => {
         if (err) {
@@ -43,7 +43,7 @@ const getStatus = (req, res) => {
     })
 }
 
-const updateStatus = (req, res) => {
+const updateStatus = async (req, res) => {
     const { name } = req.body;
     const { id } = req.params;
     Status.findOneAndUpdate(id, { name }, (err, status) => {
@@ -57,7 +57,7 @@ const updateStatus = (req, res) => {
     })
 }
 
-const deleteStatus = (req, res) => {
+const deleteStatus = async (req, res) => {
     const { id } = req.params;
     Status.findOneAndDelete(id, (err, status) => {
         if (err) {

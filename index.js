@@ -7,24 +7,24 @@ dotenv.config();
 
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const arrendatarioRoutes = require('./routes/arrendatarioRoutes');
 const userRoutes = require('./routes/userRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const statusRoutes = require('./routes/statusRoutes');
 const mailerRoutes = require('./routes/mailerRoutes');
 const fileRoutes = require('./routes/fileRoutes');
-const arrendatarioRoutes = require('./routes/arrendatarioRoutes');
 
 app.use(cors());
 app.use(express.json());
 app.options('*', cors());
 app.use('/api', productRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', arrendatarioRoutes);
 app.use('/api', userRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', statusRoutes);
 app.use('/api', mailerRoutes);
 app.use('/api', fileRoutes);
-app.use('/api', arrendatarioRoutes);
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);

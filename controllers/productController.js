@@ -18,7 +18,7 @@ const createProduct = (req, res) => {
 }
 
 const getProducts = (req, res) => {
-    Product.find({}).populate({ path: 'category status' }).exec((error, products) => {
+    Product.find({}).populate({ path: 'category' }).exec((error, products) => {
         if (error) {
             return res.status(400).send({ message: "No se pudo realizar la busqueda" })
         }
