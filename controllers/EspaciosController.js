@@ -1,10 +1,10 @@
 const Espacios= require('../models/espacios');
 
 const createEspacios = (req, res) =>{
-    const {nombre,cantidad,description} = req.body;
+    const {nombre,aforo,description} = req.body;
     const newEspacio = new Espacios({
         nombre,
-        cantidad,
+        aforo,
         description
     });
     newEspacio.save((err, espacios)=>{

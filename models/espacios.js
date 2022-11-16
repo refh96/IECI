@@ -5,7 +5,7 @@ const EspaciosSchema = new Schema({
         type:String,
         require:true
     },
-    cantidad:{
+    aforo:{
         type:Number,
         require:true
     },
