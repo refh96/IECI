@@ -14,7 +14,7 @@ function fechaRegex(input){
 }
 
 function horaRegex(input){
-    let regex = /^(2[04]|1\d|0?[1-9])[:.][0-5]\d$/
+    let regex = /^(2[0-4]|1\d|0?[1-9])[:.][0-5]\d$/
     return regex.test(input);
 }
 
