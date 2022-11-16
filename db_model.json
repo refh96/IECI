@@ -16,10 +16,6 @@
             "type":"String",
             "required": true
         },
-        "lugar": {
-            "type": "Schema.ObjectID",
-            "ref": "Lugar"
-        },
         "status": {
             "type": "Schema.ObjectID",
             "ref": "Status"
@@ -35,6 +31,21 @@
                 "active",
                 "inactive"
             ]
+        }
+    },
+
+    "espacios":{
+        "nombre":{
+            "type":"String",
+            "require":true
+        },
+        "cantidad":{
+            "type":"Number",
+            "require":true
+        },
+        "description":{
+            "type":"String",
+            "require":true
         }
     }
 }

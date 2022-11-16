@@ -23,14 +23,6 @@ const ArrendatarioSchema = new Schema({
         minLength: 1,
         maxLength: 50
     },
-    /*lugar: {
-        type:Schema.ObjectId,
-        ref: 'lugar'
-    },
-    category: {
-        type:Schema.ObjectId,
-        ref: 'category'
-    },*/
     status: {
         type: Schema.ObjectId,
         ref: 'status'

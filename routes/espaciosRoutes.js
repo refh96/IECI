@@ -1,6 +1,6 @@
 const express = require('express');
 const api = express.Router();
-const EspaciosController = require('../controllers/EspaciosController');
+const EspaciosController = require('../controllers/espaciosController');
 
 api.post('/espacios', EspaciosController.createEspacios);
 api.get('/espacios', EspaciosController.getEspacios);

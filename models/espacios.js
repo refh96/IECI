@@ -13,10 +13,6 @@ const EspaciosSchema = new Schema({
         type:String,
         require:true
     },
-    categories:{
-        type:Schema.ObjectId,
-        ref:'categories'
-    },
     status:{
         type: Schema.ObjectId,
         ref:'status'
