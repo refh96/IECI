@@ -13,6 +13,12 @@ const createArrendatario = (req, res) => {
         if (error) {
             return res.status(400).send({ message: "No se ha podido crear el arrendatario" })
         }
+        if(!Regex.nombreRegex(nombre)){
+            return res.status(400).send({ message: "Mal formato de nombre" })
+        }
+        if(!Regex.nombreRegex(apellido)){
+            return res.status(400).send({ message: "Mal formato de apellido" })
+        }
         if(!Regex.correoRegex(correo)){
             return res.status(400).send({ message: "Mal formato de correo" })
         }

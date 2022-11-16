@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ArriendoSchema = new Schema({
-    fecha_inicio:{
+    fecha:{
         type: String,
         required: true
     },
-    fecha_fin:{
+    hora_inicio:{
+        type: String,
+        required: true
+    },
+    hora_fin:{
         type: String,
         required: true
     },

@@ -1,27 +1,47 @@
-const Arrendatario = require('../models/arrendatario');
 const Arriendo = require('../models/arriendo');
+const Regex = require('../utils/testRegex');
 
 const createArriendo = (req, res) => {
-    const { fecha_inicio, fecha_fin } = req.body;
+    const { fecha, hora_inicio, hora_fin } = req.body;
     const {id, id_2} = req.params
     const newArriendo = new Arriendo({
-        fecha_inicio,
-        fecha_fin,
+        fecha,
+        hora_inicio,
+        hora_fin
     })
     newArriendo.save((err, arriendo)=>{
         if(err){
             return res.status(400).send({ message:'Error al crear el arriendo'})
         }
-        Arriendo.updateOne({_id:arriendo._id}, { $push:{ arrendatario: id, espacios: id_2}}, (err, arrendatario) => {
+        if(!Regex.fechaRegex(fecha)){
+            return res.status(400).send({ message: 'El formato de la fecha no es el correcto'})
+        }
+        if(!Regex.horaRegex(hora_inicio)){
+            return res.status(400).send({ message: 'El formato de la hora de inicio no es el correcto'})
+        }
+        if(!Regex.horaRegex(hora_fin)){
+            return res.status(400).send({ message: 'El formato de la hora final no es el correcto'})
+        }
+        Arriendo.updateOne({_id:arriendo._id}, { $push:{ arrendatario: id}}, (err, arrendatario) => {
             if(err){
                 return res.status(400).send({ message: 'Error al actualizar el arriendo'})
             }
             if(!arrendatario){
                 return res.status(404).send({ message: 'No se encontró al arrendatario'})
             }
-            return res.status(201).send(arriendo)
+            Arriendo.updateOne({_id:arriendo._id}, { $push:{ espacios: id_2}}, (err, espacios) => {
+                if(err){
+                    return res.status(400).send({ message: 'Error al actualizar el arriendo'})
+                }
+                if(!espacios){
+                    return res.status(404).send({ message: 'No se encontró el espacio'})
+                }
+                return res.status(201).send(arriendo)
+            })
         })
     })
+
+    
 
 }
 
