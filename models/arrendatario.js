@@ -23,9 +23,13 @@ const ArrendatarioSchema = new Schema({
         minLength: 1,
         maxLength: 50
     },
-    status: {
-        type: Schema.ObjectId,
-        ref: 'status'
+    status:{
+        type: String,
+        required: true,
+        enum: [
+            'Permitido',
+            'Bloqueado'
+        ]
     }
 });
 

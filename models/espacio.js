@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const EspaciosSchema = new Schema({
+const EspacioSchema = new Schema({
     nombre:{
         type:String,
         require:true
@@ -13,11 +13,14 @@ const EspaciosSchema = new Schema({
         type:String,
         require:true
     },
+    category:{
+        type:Schema.ObjectId,
+        ref:'category'
+    },
     status:{
         type: Schema.ObjectId,
         ref:'status'
     }
-
-
 });
-module.exports =  mongoose.model('espacios',EspaciosSchema);
+
+module.exports =  mongoose.model('espacio',EspacioSchema);

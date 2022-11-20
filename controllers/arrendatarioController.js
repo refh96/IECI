@@ -2,12 +2,13 @@ const Arrendatario = require('../models/arrendatario');
 const Regex = require('../utils/testRegex');
 
 const createArrendatario = (req, res) => {
-    const { nombre, apellido, número, correo } = req.body
+    const { nombre, apellido, número, correo, status } = req.body
     const newArrendatario = new Arrendatario({
         nombre,
         apellido,
         número,
-        correo
+        correo,
+        status
     })
     newArrendatario.save((error, arrendatario) => {
         if (error) {
@@ -30,7 +31,7 @@ const createArrendatario = (req, res) => {
 }
 
 const getArrendatarios = (req, res) => {
-    Arrendatario.find({}).populate({ path: 'status' }).exec((error, arrendatarios) => {
+    Arrendatario.find({}, (error, arrendatarios) => {
         if (error) {
             return res.status(400).send({ message: "No se pudo realizar la busqueda" })
         }

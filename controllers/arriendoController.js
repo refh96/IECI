@@ -1,17 +1,15 @@
 const Arriendo = require('../models/arriendo');
 const Regex = require('../utils/testRegex');
-
-const validator = function(value){
-    return /Bloqueado/.test/(value)
-}
+const Arrendatario = require('../models/arrendatario');
 
 const createArriendo = (req, res) => {
-    const { fecha, hora_inicio, hora_fin } = req.body;
-    const { id, id_2 } = req.params
+    const { fecha, hora_inicio, hora_fin, arrendatario, espacio } = req.body;
     const newArriendo = new Arriendo({
         fecha,
         hora_inicio,
-        hora_fin
+        hora_fin,
+        arrendatario,
+        espacio 
     })
     newArriendo.save((err, arriendo)=>{
         if(err){
@@ -26,31 +24,20 @@ const createArriendo = (req, res) => {
         if(!Regex.horaRegex(hora_fin)){
             return res.status(400).send({ message: 'El formato de la hora final no es el correcto'})
         }
-        Arriendo.updateOne({_id:arriendo._id}, { $push:{ arrendatario: id}}, (err, arrendatario) => {
+        Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((err, arrendatario)=>{
             if(err){
-                return res.status(400).send({ message: 'Error al actualizar el arriendo'})
+                return res.status(400).send({message: 'Error al buscar el arrendatario'})
             }
             if(!arrendatario){
-                return res.status(404).send({ message: 'No se encontró al arrendatario'})
+                return res.status(400).send({message: 'El usuario está bloqueado'})
             }
-            Arriendo.updateOne({_id:arriendo._id}, { $push:{ espacios: id_2}}, (err, espacios) => {
-                if(err){
-                    return res.status(400).send({ message: 'Error al actualizar el arriendo'})
-                }
-                if(!espacios){
-                    return res.status(404).send({ message: 'No se encontró el espacio'})
-                }
-                return res.status(201).send(arriendo)
-            })
+            return res.status(200).send(arriendo)
         })
     })
-
-    
-
 }
 
 const getArriendos = (req, res) => {
-    Arriendo.find({}).populate({ path: 'arrendatario espacios' }).exec((error, arriendos) => {
+    Arriendo.find({}).populate({ path:'arrendatario espacio' }).exec((error, arriendos) => {
         if (error) {
             return res.status(400).send({ message: "No se pudo realizar la busqueda" })
         }

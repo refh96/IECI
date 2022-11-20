@@ -1,22 +1,22 @@
-const Espacios= require('../models/espacios');
+const Espacio= require('../models/espacio');
 
-const createEspacios = (req, res) =>{
+const createEspacio = (req, res) =>{
     const {nombre,aforo,description} = req.body;
-    const newEspacio = new Espacios({
+    const newEspacio = new Espacio({
         nombre,
         aforo,
         description
     });
-    newEspacio.save((err, espacios)=>{
+    newEspacio.save((err, espacio)=>{
         if(err){
             return res.status(400).send({ message:'error al crear el espacio'})
         }
-        return res.status(201).send(espacios)
+        return res.status(201).send(espacio)
     })
 }
 
-const getEspacios = (req, res) =>{
-    Espacios.find({},(err, espacios)=>{
+const getEspacio = (req, res) =>{
+    Espacio.find({},(err, espacios)=>{
         if(err){
             return res.status(400).send({ message:'error al obtener el espacio'})
         }
@@ -24,48 +24,48 @@ const getEspacios = (req, res) =>{
     })
 }
 
-const getSpecificEspacios = (req, res) => {
+const getSpecificEspacio = (req, res) => {
     const { id } = req.params;
-    Espacios.findById(id).populate({ path: 'category' }).exec((err, espacios) => {
+    Espacio.findById(id).populate({ path: 'category' }).exec((err, espacio) => {
         if (err) {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
-        if (!espacios) {
+        if (!espacio) {
             return res.status(404).send({ message: "espacio no encontrado" })
         }
-        return res.status(200).send(espacios)
+        return res.status(200).send(espacio)
     })
 }
 
-const updateEspacios = (req, res) => {
+const updateEspacio = (req, res) => {
     const { id } = req.params;
-    Espacios.findByIdAndUpdate(id, req.body, (err, espacios) => {
+    Espacio.findByIdAndUpdate(id, req.body, (err, espacio) => {
         if (err) {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
-        if (!espacios) {
+        if (!espacio) {
             return res.status(404).send({ message: "espacio no encontrado" })
         }
-        return res.status(200).send(espacios)
+        return res.status(200).send(espacio)
     })
 }
 
-const deleteEspacios= (req, res) => {
+const deleteEspacio= (req, res) => {
     const { id } = req.params;
-    Espacios.findByIdAndDelete(id, (err, espacios) => {
+    Espacio.findByIdAndDelete(id, (err, espacio) => {
         if (err) {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
-        if (!espacios) {
+        if (!espacio) {
             return res.status(404).send({ message: "espacio no encontrado" })
         }
-        return res.status(200).send(espacios)
+        return res.status(200).send(espacio)
     })
 }
 module.exports = {
-    createEspacios,
-    getEspacios,
-    getSpecificEspacios,
-    updateEspacios,
-    deleteEspacios
+    createEspacio,
+    getEspacio,
+    getSpecificEspacio,
+    updateEspacio,
+    deleteEspacio
 }

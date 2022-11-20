@@ -15,11 +15,13 @@ const ArriendoSchema = new Schema({
     },
     arrendatario:{
         type: Schema.ObjectId,
+        required: true,
         ref: 'arrendatario'
     },
-    espacios:{
+    espacio:{
         type: Schema.ObjectId,
-        ref: 'espacios'
+        required: true,
+        ref: 'espacio'
     },
 });
 
