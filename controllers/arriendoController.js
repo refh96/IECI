@@ -1,5 +1,4 @@
 const Arriendo = require('../models/arriendo');
-const Regex = require('../utils/testRegex');
 const Arrendatario = require('../models/arrendatario');
 
 const createArriendo = (req, res) => {
