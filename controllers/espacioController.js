@@ -7,18 +7,18 @@ const createEspacio = (req, res) =>{
         aforo,
         description
     });
-    newEspacio.save((err, espacio)=>{
-        if(err){
-            return res.status(400).send({ message:'error al crear el espacio'})
+    newEspacio.save((error, espacio)=>{
+        if(error){
+            return res.status(400).send({ message:'Error al crear el espacio'})
         }
         return res.status(201).send(espacio)
     })
 }
 
 const getEspacio = (req, res) =>{
-    Espacio.find({},(err, espacios)=>{
-        if(err){
-            return res.status(400).send({ message:'error al obtener el espacio'})
+    Espacio.find({},(error, espacios)=>{
+        if(error){
+            return res.status(400).send({ message:'Error al obtener el espacio'})
         }
         return res.status(200).send(espacios)
     })
@@ -26,8 +26,8 @@ const getEspacio = (req, res) =>{
 
 const getSpecificEspacio = (req, res) => {
     const { id } = req.params;
-    Espacio.findById(id).populate({ path: 'category' }).exec((err, espacio) => {
-        if (err) {
+    Espacio.findById(id).populate({ path: 'category' }).exec((error, espacio) => {
+        if (error) {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
         if (!espacio) {
@@ -39,8 +39,8 @@ const getSpecificEspacio = (req, res) => {
 
 const updateEspacio = (req, res) => {
     const { id } = req.params;
-    Espacio.findByIdAndUpdate(id, req.body, (err, espacio) => {
-        if (err) {
+    Espacio.findByIdAndUpdate(id, req.body, (error, espacio) => {
+        if (error) {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
         if (!espacio) {
@@ -52,8 +52,8 @@ const updateEspacio = (req, res) => {
 
 const deleteEspacio= (req, res) => {
     const { id } = req.params;
-    Espacio.findByIdAndDelete(id, (err, espacio) => {
-        if (err) {
+    Espacio.findByIdAndDelete(id, (error, espacio) => {
+        if (error) {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
         if (!espacio) {

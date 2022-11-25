@@ -1,6 +1,9 @@
 const Arriendo = require('../models/arriendo');
 const Arrendatario = require('../models/arrendatario');
 
+const now = new Date(Date.now())
+const jsonNow = now.toJSON();
+
 const createArriendo = (req, res) => {
     const { fecha_inicio, fecha_fin, arrendatario, espacio } = req.body;
     const newArriendo = new Arriendo({
@@ -9,18 +12,26 @@ const createArriendo = (req, res) => {
         arrendatario,
         espacio 
     })
-    newArriendo.save((err, arriendo)=>{
-        if(err){
+    newArriendo.save((error, arriendo)=>{
+        if(error){
             return res.status(400).send({ message:'Error al crear el arriendo'})
         }
-        Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((err, arrendatario)=>{
-            if(err){
+        Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((error, arrendatario)=>{
+            if(error){
                 return res.status(400).send({message: 'Error al buscar el arrendatario'})
             }
             if(!arrendatario){
                 return res.status(400).send({message: 'El usuario está bloqueado'})
             }
-            return res.status(200).send(arriendo)
+            Arriendo.find({fecha_fin:{$gt:jsonNow}, arrendatario}, (error, arriendo)=>{
+                if(error){
+                    return res.status(400).send({ message:'Error al crear el arriendo'})
+                }
+                if(arriendo.length > 3){
+                    return res.status(400).send({ message:'Error, ya ha reservado más de 3 espacios comunes'})
+                }
+                return res.status(200).send(arriendo)
+            })  
         })
     })
 }
