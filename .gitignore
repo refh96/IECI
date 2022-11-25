@@ -1,5 +1,8 @@
 node_modules/
 .env
+.env.save
 yarn.lock
-yarn-error
+package.json
+package-lock.json
+yarn-error.log
 upload/

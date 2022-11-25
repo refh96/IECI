@@ -30,5 +30,5 @@ mongoose.connect(process.env.DB, (error) => {
 })
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server started on port ${process.env.PORT}`);
+    console.log(`Server started on port ${process.env.PORT}`)
 })
