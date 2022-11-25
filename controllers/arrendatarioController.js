@@ -1,3 +1,4 @@
+const { query } = require('express');
 const Arrendatario = require('../models/arrendatario');
 const Regex = require('../utils/testRegex');
 
@@ -39,6 +40,33 @@ const getArrendatarios = (req, res) => {
             return res.status(404).send({ message: "No se encontraron arrendatarios" })
         }
         return res.status(200).send(arrendatarios)
+    })
+}
+
+const changeStatus = (req, res) => {
+    const { id } = req.params
+    const query = Arrendatario.findById(id)
+    query.exec((error, arrendatario) => {
+        if(error){
+            return res.status(400).send({ message: "No se pudo actualizar el arrendatario" })
+        }
+        if(arrendatario.status === 'Bloqueado'){
+            query.updateOne({status: 'Permitido'}).exec((error) => {
+                if(error){
+                    return res.status(400).send({ message: "No se pudo actualizar el arrendatario" })
+                }
+                return res.status(200).send({ message: "Status actualizado a Permitido" })
+            })
+        }
+        else{
+            query.updateOne({status: 'Bloqueado'}).exec((error) => {
+                if(error){
+                    return res.status(400).send({ message: "No se pudo actualizar el arrendatario" })
+                }
+                return res.status(200).send({ message: "Status actualizado a Bloqueado" })
+            })
+
+        }
     })
 }
 
@@ -84,6 +112,7 @@ const getArrendatario = (req, res) => {
 module.exports = {
     createArrendatario,
     getArrendatarios,
+    changeStatus,
     updateArrendatario,
     deleteArrendatario,
     getArrendatario

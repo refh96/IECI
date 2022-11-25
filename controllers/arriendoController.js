@@ -3,26 +3,16 @@ const Regex = require('../utils/testRegex');
 const Arrendatario = require('../models/arrendatario');
 
 const createArriendo = (req, res) => {
-    const { fecha, hora_inicio, hora_fin, arrendatario, espacio } = req.body;
+    const { fecha_inicio, fecha_fin, arrendatario, espacio } = req.body;
     const newArriendo = new Arriendo({
-        fecha,
-        hora_inicio,
-        hora_fin,
+        fecha_inicio,
+        fecha_fin,
         arrendatario,
         espacio 
     })
     newArriendo.save((err, arriendo)=>{
         if(err){
             return res.status(400).send({ message:'Error al crear el arriendo'})
-        }
-        if(!Regex.fechaRegex(fecha)){
-            return res.status(400).send({ message: 'El formato de la fecha no es el correcto'})
-        }
-        if(!Regex.horaRegex(hora_inicio)){
-            return res.status(400).send({ message: 'El formato de la hora de inicio no es el correcto'})
-        }
-        if(!Regex.horaRegex(hora_fin)){
-            return res.status(400).send({ message: 'El formato de la hora final no es el correcto'})
         }
         Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((err, arrendatario)=>{
             if(err){
