@@ -11,24 +11,26 @@ const createArrendatario = (req, res) => {
         correo,
         status
     })
-    newArrendatario.save((error, arrendatario) => {
-        if (error) {
-            return res.status(400).send({ message: "No se ha podido crear el arrendatario" })
-        }
-        if(!Regex.nombreRegex(nombre)){
-            return res.status(400).send({ message: "Mal formato de nombre" })
-        }
-        if(!Regex.nombreRegex(apellido)){
-            return res.status(400).send({ message: "Mal formato de apellido" })
-        }
-        if(!Regex.correoRegex(correo)){
-            return res.status(400).send({ message: "Mal formato de correo" })
-        }
-        if(!Regex.numeroRegex(número)){
-            return res.status(400).send({ message: "Mal formato de número" })
-        }
-        return res.status(201).send(arrendatario)
-    })
+    if(!Regex.nombreRegex(nombre)){
+        return res.status(400).send({ message: "Mal formato de nombre" })
+    }
+    else if(!Regex.nombreRegex(apellido)){
+        return res.status(400).send({ message: "Mal formato de apellido" })
+    }
+    else if(!Regex.correoRegex(correo)){
+        return res.status(400).send({ message: "Mal formato de correo" })
+    }
+    else if(!Regex.numeroRegex(número)){
+        return res.status(400).send({ message: "Mal formato de número" })
+    }
+    else {
+        newArrendatario.save((error, arrendatario) => {
+            if (error) {
+                return res.status(400).send({ message: "No se ha podido crear el arrendatario" })
+            }
+            return res.status(201).send(arrendatario)
+        })
+    }
 }
 
 const getArrendatarios = (req, res) => {

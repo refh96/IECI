@@ -1,9 +1,6 @@
 const Arriendo = require('../models/arriendo');
 const Arrendatario = require('../models/arrendatario');
 
-const now = new Date(Date.now())
-const jsonNow = now.toJSON();
-
 const createArriendo = (req, res) => {
     const { fecha_inicio, fecha_fin, arrendatario, espacio } = req.body;
     const newArriendo = new Arriendo({
@@ -12,27 +9,53 @@ const createArriendo = (req, res) => {
         arrendatario,
         espacio 
     })
-    newArriendo.save((error, arriendo)=>{
+
+    const now = new Date
+    const nextWeek = new Date
+    nextWeek.setDate(nextWeek.getDate() + 7)
+    const hourOnMilS = 3600000
+    const inicio = new Date(fecha_inicio)
+    const fin = new Date(fecha_fin)
+    const jsonNow = now.toJSON()
+
+    if(inicio > fin){
+        return res.status(400).send({ message: 'Error, fecha de inicio es después de la fecha de fin'})
+    }
+    else if((fin - inicio)/hourOnMilS > 6){
+        return res.status(400).send({ message: 'Error, reserva está fuera del rango de 6 horas'}) 
+    }
+    else if(inicio < now || inicio > nextWeek || fecha_fin < now || fecha_fin > nextWeek){
+        return res.status(400).send({ message: 'Error, fechas están fuera del rango de una semana'})
+    }
+    else addArriendo(arrendatario, newArriendo, jsonNow, res)
+}
+
+const addArriendo = (arrendatario, newArriendo, jsonNow, res) => {
+    Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((error, arrendatario)=>{
         if(error){
-            return res.status(400).send({ message:'Error al crear el arriendo'})
+            return res.status(400).send({message: 'Error al buscar el arrendatario'})
         }
-        Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((error, arrendatario)=>{
-            if(error){
-                return res.status(400).send({message: 'Error al buscar el arrendatario'})
-            }
-            if(!arrendatario){
-                return res.status(400).send({message: 'El usuario está bloqueado'})
-            }
+        if(!arrendatario){
+            return res.status(400).send({message: 'El usuario está bloqueado'})
+        }
+        else{    
             Arriendo.find({fecha_fin:{$gt:jsonNow}, arrendatario}, (error, arriendo)=>{
                 if(error){
-                    return res.status(400).send({ message:'Error al crear el arriendo'})
+                    return res.status(400).send({ message:'Error al buscar los arriendos'})
                 }
                 if(arriendo.length > 3){
                     return res.status(400).send({ message:'Error, ya ha reservado más de 3 espacios comunes'})
                 }
-                return res.status(200).send(arriendo)
-            })  
-        })
+                else{
+                    newArriendo.save((error, arriendo) =>{
+                        if(error){
+                            return res.status(400).send({ message: 'Error al crear el arriendo'})
+                        }
+                        return res.status(200).send(arriendo)
+                    })
+                }
+            })
+        }  
     })
 }
 

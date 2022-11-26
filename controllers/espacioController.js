@@ -31,7 +31,7 @@ const getSpecificEspacio = (req, res) => {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
         if (!espacio) {
-            return res.status(404).send({ message: "espacio no encontrado" })
+            return res.status(404).send({ message: "Espacio no encontrado" })
         }
         return res.status(200).send(espacio)
     })
@@ -44,7 +44,7 @@ const updateEspacio = (req, res) => {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
         if (!espacio) {
-            return res.status(404).send({ message: "espacio no encontrado" })
+            return res.status(404).send({ message: "Espacio no encontrado" })
         }
         return res.status(200).send(espacio)
     })
@@ -57,7 +57,7 @@ const deleteEspacio= (req, res) => {
             return res.status(400).send({ message: "Error al obtener el espacio" })
         }
         if (!espacio) {
-            return res.status(404).send({ message: "espacio no encontrado" })
+            return res.status(404).send({ message: "Espacio no encontrado" })
         }
         return res.status(200).send(espacio)
     })
