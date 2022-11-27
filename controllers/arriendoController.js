@@ -24,38 +24,52 @@ const createArriendo = (req, res) => {
     else if((fin - inicio)/hourOnMilS > 6){
         return res.status(400).send({ message: 'Error, reserva está fuera del rango de 6 horas'}) 
     }
-    else if(inicio < now || inicio > nextWeek || fecha_fin < now || fecha_fin > nextWeek){
-        return res.status(400).send({ message: 'Error, fechas están fuera del rango de una semana'})
+    else if(inicio < now || inicio > nextWeek || fin < now || fin > nextWeek){
+        return res.status(400).send({ message: 'Error, fechas están fuera del periodo de una semana'})
     }
-    else addArriendo(arrendatario, newArriendo, jsonNow, res)
+    else testBloqueo(arrendatario, espacio, newArriendo, jsonNow, fecha_inicio, fecha_fin, res)
 }
 
-const addArriendo = (arrendatario, newArriendo, jsonNow, res) => {
-    Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((error, arrendatario)=>{
+const testBloqueo = (arrendatario, espacio, newArriendo, jsonNow, fecha_inicio, fecha_fin, res) => {
+    Arrendatario.findById(arrendatario).where('status', 'Permitido').exec((error, cliente)=>{
         if(error){
             return res.status(400).send({message: 'Error al buscar el arrendatario'})
         }
-        if(!arrendatario){
-            return res.status(400).send({message: 'El usuario está bloqueado'})
+        if(!cliente){
+            return res.status(400).send({message: 'El arrendatario está bloqueado'})
         }
-        else{    
-            Arriendo.find({fecha_fin:{$gt:jsonNow}, arrendatario}, (error, arriendo)=>{
+        else testIguales(arrendatario, espacio, newArriendo, jsonNow, fecha_inicio, fecha_fin, res)
+    })
+}
+
+const testIguales = (arrendatario, espacio, newArriendo, jsonNow, date_inicio, date_fin, res) => {
+    Arriendo.find({arrendatario, espacio, fecha_inicio: {$gte:date_inicio, $lte:date_fin}, fecha_fin: {$gte:date_inicio, $lte:date_fin}}, (error, arriendo) => {
+        if(error){
+            return res.status(400).send({message: 'Error al buscar los arriendos'})
+        }
+        if(arriendo.length > 0){
+            return res.status(400).send({message: 'Ya existe un arriendo en el horario especificado'})
+        }
+        else testCantidadReservas(arrendatario, newArriendo, jsonNow, res)
+    })
+}
+
+const testCantidadReservas = (arrendatario, newArriendo, jsonNow, res) => {    
+    Arriendo.find({fecha_fin:{$gt:jsonNow}, arrendatario}, (error, arriendo)=>{
+        if(error){
+            return res.status(400).send({ message:'Error al buscar los arriendos'})
+        }
+        if(arriendo.length >= 3){
+            return res.status(400).send({ message:'Error, ya ha reservado más de 3 espacios comunes'})
+        }
+        else{
+            newArriendo.save((error, arriendo) =>{
                 if(error){
-                    return res.status(400).send({ message:'Error al buscar los arriendos'})
+                    return res.status(400).send({ message: 'Error al crear el arriendo'})
                 }
-                if(arriendo.length > 3){
-                    return res.status(400).send({ message:'Error, ya ha reservado más de 3 espacios comunes'})
-                }
-                else{
-                    newArriendo.save((error, arriendo) =>{
-                        if(error){
-                            return res.status(400).send({ message: 'Error al crear el arriendo'})
-                        }
-                        return res.status(200).send(arriendo)
-                    })
-                }
+                return res.status(200).send(arriendo)
             })
-        }  
+        }
     })
 }
 
