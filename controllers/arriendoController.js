@@ -43,12 +43,12 @@ const testBloqueo = (arrendatario, espacio, newArriendo, jsonNow, fecha_inicio, 
 }
 
 const testIguales = (arrendatario, espacio, newArriendo, jsonNow, date_inicio, date_fin, res) => {
-    Arriendo.find({arrendatario, espacio, fecha_inicio: {$gte:date_inicio, $lte:date_fin}, fecha_fin: {$gte:date_inicio, $lte:date_fin}}, (error, arriendo) => {
+    Arriendo.find({arrendatario, espacio, fecha_inicio: {$lt:date_fin}, fecha_fin: {$gt:date_inicio}}, (error, arriendo) => {
         if(error){
-            return res.status(400).send({message: 'Error al buscar los arriendos'})
+            return res.status(400).send({message: 'Error al buscar los arriendos iguales'})
         }
         if(arriendo.length > 0){
-            return res.status(400).send({message: 'Ya existe un arriendo en el horario especificado'})
+            return res.status(400).send({message: 'Ya existe un arriendo en el horario y lugar especificado'})
         }
         else testCantidadReservas(arrendatario, newArriendo, jsonNow, res)
     })
