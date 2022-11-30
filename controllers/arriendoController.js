@@ -1,5 +1,6 @@
 const Arriendo = require('../models/arriendo');
 const Arrendatario = require('../models/arrendatario');
+const Espacio= require('../models/espacio');
 
 const createArriendo = (req, res) => {
     const { fecha_inicio, fecha_fin, arrendatario, espacio } = req.body;
@@ -7,7 +8,7 @@ const createArriendo = (req, res) => {
         fecha_inicio,
         fecha_fin,
         arrendatario,
-        espacio 
+        espacio
     })
 
     const now = new Date
@@ -18,6 +19,7 @@ const createArriendo = (req, res) => {
     const fin = new Date(fecha_fin)
     const jsonNow = now.toJSON()
 
+
     if(inicio > fin){
         return res.status(400).send({ message: 'Error, fecha de inicio es después de la fecha de fin'})
     }
@@ -26,6 +28,9 @@ const createArriendo = (req, res) => {
     }
     else if(inicio < now || inicio > nextWeek || fin < now || fin > nextWeek){
         return res.status(400).send({ message: 'Error, fechas están fuera del periodo de una semana'})
+    }
+    else if((fin-inicio)/hourOnMilS>Espacio.findByID(espacio).get('tiempoMáximoDeArriendo')){
+        return res.status(400).send({ message: 'Error, Supera el tiempo maximo de arriendo'})
     }
     else testBloqueo(arrendatario, espacio, newArriendo, jsonNow, fecha_inicio, fecha_fin, res)
 }

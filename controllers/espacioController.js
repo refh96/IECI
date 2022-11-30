@@ -1,3 +1,4 @@
+const espacio = require('../models/espacio');
 const Espacio= require('../models/espacio');
 
 const createEspacio = (req, res) =>{
@@ -37,6 +38,33 @@ const getSpecificEspacio = (req, res) => {
     })
 }
 
+const changeStatus = (req, res) => {
+    const { id } = req.params
+    const query = Espacio.findById(id)
+    query.exec((error, Espacio) => {
+        if(error){
+            return res.status(400).send({ message: "No se pudo actualizar el espacio" })
+        }
+        if(Espacio.status === 'En mantenimiento'){
+            query.updateOne({status: 'Disponible'}).exec((error) => {
+                if(error){
+                    return res.status(400).send({ message: "No se pudo actualizar el espacio" })
+                }
+                return res.status(200).send({ message: "Status actualizado a Disponible" })
+            })
+        }
+        else{
+            query.updateOne({status: 'En mantenimiento'}).exec((error) => {
+                if(error){
+                    return res.status(400).send({ message: "No se pudo actualizar el espacio" })
+                }
+                return res.status(200).send({ message: "Status actualizado a Disponible" })
+            })
+
+        }
+    })
+}
+
 const updateEspacio = (req, res) => {
     const { id } = req.params;
     Espacio.findByIdAndUpdate(id, req.body, (error, espacio) => {
@@ -65,6 +93,7 @@ const deleteEspacio= (req, res) => {
 module.exports = {
     createEspacio,
     getEspacio,
+    changeStatus,
     getSpecificEspacio,
     updateEspacio,
     deleteEspacio

@@ -17,9 +17,17 @@ const EspacioSchema = new Schema({
         type:Schema.ObjectId,
         ref:'category'
     },
+    tiempoMáximoDeArriendo:{
+        type:Number,
+        require:true
+    },
     status:{
-        type: Schema.ObjectId,
-        ref:'status'
+        type: String,
+        required: true,
+        enum: [
+            'Disponible',
+            'En Mantenimiento'
+        ]
     }
 });
 
