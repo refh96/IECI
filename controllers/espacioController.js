@@ -1,12 +1,14 @@
-const espacio = require('../models/espacio');
+const { query } = require('express');
 const Espacio= require('../models/espacio');
 
 const createEspacio = (req, res) =>{
-    const {nombre,aforo,description} = req.body;
+    const {nombre,aforo,descripcion,tiempoMáximoDeArriendo, status} = req.body;
     const newEspacio = new Espacio({
         nombre,
         aforo,
-        description
+        descripcion,
+        tiempoMáximoDeArriendo,
+        status
     });
     newEspacio.save((error, espacio)=>{
         if(error){
