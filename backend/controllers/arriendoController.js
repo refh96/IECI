@@ -29,7 +29,7 @@ const createArriendo = (req, res) => {
     else if(inicio < now || inicio > nextWeek || fin < now || fin > nextWeek){
         return res.status(400).send({ message: 'Error, fechas están fuera del periodo de una semana'})
     }
-    else if((fin-inicio)/hourOnMilS>Espacio.findByID(espacio).get('tiempoMáximoDeArriendo')){
+    else if((fin-inicio)/hourOnMilS>Espacio.findByID(espacio).get('tiempoMaximoDeArriendo')){
         return res.status(400).send({ message: 'Error, Supera el tiempo maximo de arriendo'})
     }
     else testBloqueo(arrendatario, espacio, newArriendo, jsonNow, fecha_inicio, fecha_fin, res)

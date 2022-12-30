@@ -3,11 +3,11 @@ const Arrendatario = require('../models/arrendatario');
 const Regex = require('../utils/testRegex');
 
 const createArrendatario = (req, res) => {
-    const { nombre, apellido, número, correo, status } = req.body
+    const { nombre, apellido, numero, correo, status } = req.body
     const newArrendatario = new Arrendatario({
         nombre,
         apellido,
-        número,
+        numero,
         correo,
         status
     })
@@ -20,8 +20,8 @@ const createArrendatario = (req, res) => {
     else if(!Regex.correoRegex(correo)){
         return res.status(400).send({ message: "Mal formato de correo" })
     }
-    else if(!Regex.numeroRegex(número)){
-        return res.status(400).send({ message: "Mal formato de número" })
+    else if(!Regex.numeroRegex(numero)){
+        return res.status(400).send({ message: "Mal formato de numero" })
     }
     else {
         newArrendatario.save((error, arrendatario) => {
@@ -50,20 +50,20 @@ const changeStatus = (req, res) => {
     const query = Arrendatario.findById(id)
     query.exec((error, arrendatario) => {
         if(error){
-            return res.status(400).send({ message: "No se pudo actualizar el arrendatario" })
+            return res.status(400).send({ message: "No se pudo actualizar el arrendatario 1" })
         }
         if(arrendatario.status === 'Bloqueado'){
-            query.updateOne({status: 'Permitido'}).exec((error) => {
+            arrendatario.updateOne({status: 'Permitido'}).exec((error) => {
                 if(error){
-                    return res.status(400).send({ message: "No se pudo actualizar el arrendatario" })
+                    return res.status(400).send({ message: "No se pudo actualizar el arrendatario 2" })
                 }
                 return res.status(200).send({ message: "Status actualizado a Permitido" })
             })
         }
         else{
-            query.updateOne({status: 'Bloqueado'}).exec((error) => {
+            arrendatario.updateOne({status: 'Bloqueado'}).exec((error) => {
                 if(error){
-                    return res.status(400).send({ message: "No se pudo actualizar el arrendatario" })
+                    return res.status(400).send({ message: "No se pudo actualizar el arrendatario :"+error })
                 }
                 return res.status(200).send({ message: "Status actualizado a Bloqueado" })
             })

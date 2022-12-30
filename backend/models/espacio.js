@@ -17,7 +17,7 @@ const EspacioSchema = new Schema({
         type:Schema.ObjectId,
         ref:'category'
     },
-    tiempoMáximoDeArriendo:{
+    tiempoMaximoDeArriendo:{
         type:Number,
         require:true
     },

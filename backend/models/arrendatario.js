@@ -13,7 +13,7 @@ const ArrendatarioSchema = new Schema({
         minLength: 1,
         maxLength: 50
     },
-    número:{
+    numero:{
         type: Number,
         required: true
     },

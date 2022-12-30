@@ -14,12 +14,9 @@ app.use(express.json());
 app.options('*', cors());
 app.use('/api', espacioRoutes);
 app.use('/api', arrendatarioRoutes);
-app.use('/api', arriendoRoutes)
+app.use('/api', arriendoRoutes);
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.set('useUnifiedTopology', true);
+
 
 mongoose.connect(process.env.DB, (error) => {
     if (error) {
