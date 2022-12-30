@@ -10,10 +10,10 @@ export default function Home() {
     <>
     <ul>
       <li>
-        <Link href="/admin">Administrador</Link>
+        <Link href="/arriendo/crear">Arriendo Crear</Link>
       </li>
       <li>
-        <Link href="/usuario">usuario</Link>
+        <Link href="/arriendo/list">Arriendo Lista</Link>
       </li>
     </ul>
     </>
