@@ -17,7 +17,7 @@ const index = () => {
             </div>
           </div>
           <HStack justify="center" p="30">
-            <a href="./usuario" type="button">
+            <a href="./ingreso" type="button">
               <img
                 border="0"
                 alt="usuario"
