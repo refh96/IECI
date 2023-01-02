@@ -1,21 +1,46 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { Inter } from '@next/font/google'
+import React from "react";
+import { Button, Container, Heading, Stack, HStack } from "@chakra-ui/react";
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
-
+const index = () => {
   return (
     <>
-    <ul>
-      <li>
-        <Link href="/admin">Administrador</Link>
-      </li>
-      <li>
-        <Link href="/usuario">usuario</Link>
-      </li>
-    </ul>
+      <Container maxW="container.xl" p={5} centerContent>
+        <Stack spacing={3} my={"40"} justify="center">
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4 " >Reserva tu Espacio</h1>
+              <h2 class="lead">
+                Bienvenido Porfavor seleccione una opcion:
+              </h2>
+            </div>
+          </div>
+          <HStack justify="center" p="30">
+            <a href="./usuario" type="button">
+              <img
+                border="0"
+                alt="usuario"
+                src="usuario.gif"
+                width="100"
+                height="100"
+                align="center"
+              />
+            </a>
+            <Heading as="h3" className="nav-" size="lg" align="center">
+              Inicio Usuario
+            </Heading>
+          </HStack>
+          <HStack justify="center" p="30">
+            <a href="./admin">
+              <img border="0" src="usuario.gif" width="100" height="100" />
+            </a>
+            <Heading as="h3" size="lg" align="center">
+              Administrador
+            </Heading>
+          </HStack>
+        </Stack>
+      </Container>
     </>
-  )
-}
+  );
+};
+
+export default index;
