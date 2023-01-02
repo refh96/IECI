@@ -6,7 +6,7 @@ const checkRUT = (req, res, next) => {
             return res.status(400).send({message:"El usuario no existe"})
         }
         if(!arrendatario){
-            return res.status(200).send({message: "Usuario logeado correctamente"})
+            return res.status(404).send({message: "Usuario no existe"})
         }
         return res.status(200).send({message:"Usuario logeado correctamente"})
     })

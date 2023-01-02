@@ -2,11 +2,11 @@
 body {
       font-family: Arial, Helvetica, sans-serif;
 
-      background: radial-gradient(ellipse farthest-corner at 40px 80px , #fff 50%, rgba(0, 255, 0, 0) 0%, #0055ff 50%);
+      background: radial-gradient(ellipse farthest-corner at 40px 80px , rgb(53, 81, 172) 50%, rgba(13, 138, 13, 0.719) 0%, #0055ff 50%);
 }
 h1{
   font-family: 'Courier New', Courier, monospace;
-  border: 8px solid powderblue;
+  border: 8px solid rgb(10, 69, 77);
 }
 h2{
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;

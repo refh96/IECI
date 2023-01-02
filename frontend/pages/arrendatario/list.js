@@ -3,7 +3,6 @@ import { Inter } from '@next/font/google'
 import { use } from "react"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
 const inter = Inter({ subsets: ['latin'] })
 
 export async function getServerSideProps(context) {

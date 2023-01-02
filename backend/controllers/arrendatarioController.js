@@ -13,7 +13,7 @@ const createArrendatario = (req, res) => {
     })
     if(!Regex.nombreRegex(nombre)){
         return res.status(400).send({ message: "Mal formato de nombre" })
-    }
+    }/*
     else if(!Regex.nombreRegex(apellido)){
         return res.status(400).send({ message: "Mal formato de apellido" })
     }
@@ -22,7 +22,7 @@ const createArrendatario = (req, res) => {
     }
     else if(!Regex.numeroRegex(numero)){
         return res.status(400).send({ message: "Mal formato de numero" })
-    }
+    }*/
     else {
         newArrendatario.save((error, arrendatario) => {
             if (error) {

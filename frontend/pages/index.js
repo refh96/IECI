@@ -1,48 +1,26 @@
-import React from "react";
-import { Button, Container, Heading, Stack, HStack } from "@chakra-ui/react";
+import Head from 'next/head'
+import Link from 'next/link'
+import { Inter } from '@next/font/google'
+import { Heading, Center, Fade, Image, Container, HStack, Stack, Button } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
-const index = () => {
-  
-  
+const inter = Inter({ subsets: ['latin'] })
+
+export default function Home() {
+  const router = useRouter()
   return (
     <>
-      <Container maxW="container.xl" p={5} centerContent>
-        <Stack spacing={3} my={"40"} justify="center">
-          <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <h1 class="display-4 " >Reserva tu Espacio</h1>
-              <h2 class="lead">
-                Bienvenido Porfavor seleccione una opcion:
-              </h2>
-            </div>
-          </div>
-          <HStack justify="center" p="30">
-            <a href="./ingreso" type="button">
-              <img
-                border="0"
-                alt="usuario"
-                src="usuario.gif"
-                width="100"
-                height="100"
-                align="center"
-              />
-            </a>
-            <Heading as="h3" className="nav-" size="lg" align="center">
-              Inicio Usuario
-            </Heading>
-          </HStack>
-          <HStack justify="center" p="30">
-            <a href="./admin">
-              <img border="0" src="usuario.gif" width="100" height="100" />
-            </a>
-            <Heading as="h3" size="lg" align="center">
-              Administrador
-            </Heading>
-          </HStack>
+    <Container maxW="container.xl">
+        <Stack spacing = '24px' my={'40'} p='5'>
+          <Center>
+            <Heading as='h1' color={'blue.100'}>Espacios Comunes</Heading>
+          </Center>
+          <Center>
+            <Image src = 'https://www.pasteneyrojo.cl/configuraciones/imagen/noticia/noticia/95/imagen/039442431d09daa840ba04cdbfe67b94/type/detalle/' alt = 'Espacios'/>
+          </Center>
+          <Button colorScheme='red' onClick = {()=>router.push('/admin')}>Administrador</Button>
+          <Button colorScheme='blue' onClick = {()=>router.push('/usuario')}>Usuario</Button>
         </Stack>
-      </Container>
-    </>
-  );
-};
-
-export default index;
+    </Container>
+    </> )
+}
