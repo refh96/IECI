@@ -107,7 +107,7 @@ function Page({ data }) {
                     <tr key={index}>
                       <td>{value.nombre}</td>
                       <td>{value.aforo}</td>
-                      <td>{value.tiempoMaximoDeArriendo}</td>
+                      <td>{value.tiempoMáximoDeArriendo}</td>
                       <td className={value.status=='En Mantenimiento'?'text-danger':'text-success'} align="center">
                         <a onClick={()=>statusChange(value._id)}>⬤</a>
                       </td>

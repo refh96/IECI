@@ -106,7 +106,7 @@ function Page({ data }) {
                   return (
                     <tr key={index}>
                       <td>{value.nombre} {value.apellido}</td>
-                      <td>{value.numero}</td>
+                      <td>{value.número}</td>
                       <td>{value.correo}</td>
                       <td className={value.status=='Bloqueado'?'text-danger':'text-success'} align="center">
                         <a onClick={()=>statusChange(value._id)}>⬤</a>

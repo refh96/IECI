@@ -1,21 +1,22 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
-
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const handleSubmit = async (event) => {
+
+
+  const handleSubmit = async (e) => {
     //Para el evento submit
-    event.preventDefault()
+    e.preventDefault()
 
     //Paso el elemento que genera el evento (el formulario)
-    let formulario = event.target; 
+    let formulario = e.target; 
     //Creo un objeto con los datos del formulario.
     const data = {
       "nombre":formulario.nombre.value,
       "apellido":formulario.apellido.value,
-      "numero":formulario.numero.value,
+      "número":formulario.número.value,
       "correo":formulario.correo.value,
       "status":formulario.status.value
     }
@@ -86,19 +87,19 @@ export default function Home() {
           <form  onSubmit={handleSubmit} > 
           <div className="card-body">           
             <div className="mb-3">
-                <label className="form-label">Nombre</label>
-                <input type="text" name="nombre" className="form-control"/>
+                <label className="form-label">nombre</label>
+                <input type="string" name="nombre" className="form-control"/>
             </div>         
             <div className="mb-3">
                 <label className="form-label">apellido</label>
-                <input type="text" name="apellido" className="form-control"/>
+                <input type="string" name="apellido" className="form-control"/>
             </div>         
             <div className="mb-3">
-                <label className="form-label">Numero</label>
-                <input type="number" name="numero" className="form-control"/>
+                <label className="form-label">numero</label>
+                <input type="number" name="número" className="form-control"/>
             </div>         
             <div className="mb-3">
-                <label className="form-label">Correo</label>
+                <label className="form-label">correo</label>
                 <input type="email" name="correo" className="form-control"/>
             </div>         
             <div className="mb-3">
@@ -110,7 +111,7 @@ export default function Home() {
             </div>
           </div>
           <div className="card-footer">
-              <button className="btn btn-success w-100" type="submit">Enviar</button>
+              <button className="btn btn-success w-100" type="Submit">Enviar</button>
           </div>
           </form>
         </div>

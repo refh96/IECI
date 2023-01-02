@@ -105,7 +105,7 @@ export default function Home() {
               <div className="mb-3">
                 <label className="form-label">Arrendatario</label>
                 <input
-                  type="Schema.ObjectId"
+                  type="string"
                   name="arrendatario"
                   className="form-control"
                 />
@@ -113,7 +113,7 @@ export default function Home() {
               <div className="mb-3">
                 <label className="form-label">Espacio</label>
                 <input
-                  type="Schema.ObjectId"
+                  type="string"
                   name="espacio"
                   className="form-control"
                 />
