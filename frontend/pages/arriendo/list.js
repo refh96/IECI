@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import { use } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import getFecha from "../../auxiliar/fecha"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,7 +32,6 @@ export async function getServerSideProps(context) {
 
 function Page({ data }) {
   const router = useRouter();
-
 
   return (
     <>
@@ -78,9 +78,9 @@ function Page({ data }) {
             {data.map((value, index) => {
               return (
                 <tr key={index}>
-                  <td>{value.fecha_inicio}<td/> 
+                  <td>{getFecha(value.fecha_inicio)}<td/> 
                   </td>
-                  <td>{value.fecha_fin}</td>
+                  <td>{getFecha(value.fecha_fin)}</td>
                   <td>{value.arrendatario.nombre}</td>
                   <td>{value.espacio.nombre}</td>
                   <td>
