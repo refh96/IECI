@@ -23,7 +23,7 @@ export default function Home() {
     const JSONdata = JSON.stringify(data)
 
     // direccion de la api para guardar
-    const url = 'http://146.83.198.35:1095/api/Espacios/'
+    const url = 'http://146.83.198.35:1095/api/Espacios'
 
     // opciones de envio
     const options = {

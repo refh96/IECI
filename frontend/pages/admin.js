@@ -67,22 +67,22 @@ export default function Home() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <a className="nav-link" href='./espacio/list.js'>
+              <a className="nav-link" href='./espacio/list'>
                 Lista de espacios
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href='./arriendo/list.js' >
+              <a className="nav-link" href='./arriendo/list' >
                 Lista de Arriendos
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href='./arrendatario/list.js'>
+              <a className="nav-link" href='./arrendatario/list'>
                 Lista de Arrendatarios
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='./arrendatario/crear.js'>
+              <a className='nav-link' href='./arrendatario/crear'>
                 Agregar Arrendatario
               </a>
             </li>

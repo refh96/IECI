@@ -15,15 +15,15 @@ export default function Home() {
     const data = {
       "fecha_inicio":formulario.fecha_inicio.value,
       "fecha_fin":formulario.fecha_fin.value,
-      "arrendatario":formulario.arrendatario.value,
-      "espacio":formulario.espacio.value
+      "arrendatario:nombre":formulario.nombre.value,
+      "espacio:nombre":formulario.nombre.value
     }
 
     // paso el onjeto a formato Json
     const JSONdata = JSON.stringify(data)
 
     // direccion de la api para guardar
-    const url = 'http://localhost/api/arriendos'
+    const url = 'http://146.83.198.35:1095/api/arriendos'
 
     // opciones de envio
     const options = {
@@ -63,19 +63,19 @@ export default function Home() {
           <div className="card-body">           
             <div className="mb-3">
                 <label className="form-label">Fecha Inicio</label>
-                <input type="text" name="nombre" className="form-control"/>
+                <input type="date" name="fecha_inicio" className="form-control"/>
             </div>         
             <div className="mb-3">
                 <label className="form-label">fecha Fin</label>
-                <input type="text" name="apellido" className="form-control"/>
+                <input type="date" name="fecha_fin" className="form-control"/>
             </div>         
             <div className="mb-3">
                 <label className="form-label">Arrendatario</label>
-                <input type="number" name="numero" className="form-control"/>
+                <input type="Schema.ObjectId" name="arrendatario" className="form-control"/>
             </div>         
             <div className="mb-3">
                 <label className="form-label">Espacio</label>
-                <input type="email" name="correo" className="form-control"/>
+                <input type="Schema.ObjectId" name="espacio" className="form-control"/>
             </div>         
           <div className="card-footer">
               <button className="btn btn-success w-100" type="submit">Enviar</button>

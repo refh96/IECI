@@ -26,7 +26,7 @@ function Page({ data }) {
     const JSONdata = JSON.stringify(data);
 
     // direccion de la api para guardar
-    const url = "http://localhost/api/arriendos/update/" + id;
+    const url = "http://146.83.198.35:1095/api/arriendos/update/" + id;
 
     // opciones de envio
     const options = {
@@ -67,8 +67,8 @@ function Page({ data }) {
               <div className="mb-3">
                 <label className="form-label">fecha Inicio</label>
                 <input
-                  type="text"
-                  name="nombre"
+                  type="date"
+                  name="fecha_inicio"
                   className="form-control"
                   defaultValue={data.fecha_inicio}
                 />
@@ -76,8 +76,8 @@ function Page({ data }) {
               <div className="mb-3">
                 <label className="form-label">fecha Fin</label>
                 <input
-                  type="text"
-                  name="apellido"
+                  type="date"
+                  name="fecha_fin"
                   className="form-control"
                   defaultValue={data.fecha_fin}
                 />
@@ -85,8 +85,8 @@ function Page({ data }) {
               <div className="mb-3">
                 <label className="form-label">Arrendatario</label>
                 <input
-                  type="number"
-                  name="numero"
+                  type="Schema.ObjectId"
+                  name="arrendatario"
                   className="form-control"
                   defaultValue={data.arrendatario}
                 />
@@ -94,8 +94,8 @@ function Page({ data }) {
               <div className="mb-3">
                 <label className="form-label">Espacio</label>
                 <input
-                  type="email"
-                  name="correo"
+                  type="Schema.ObjectId"
+                  name="espacio"
                   className="form-control"
                   defaultValue={data.espacio}
                 />
@@ -116,7 +116,7 @@ function Page({ data }) {
 export async function getServerSideProps(context) {
   const id = context.query.id;
   // direccion de la api para guardar
-  const url = "http://localhost/api/arriendos/search/" + id;
+  const url = "http://146.83.198.35:1095/api/arriendos/search/" + id;
 
   // opciones de envio
   const options = {

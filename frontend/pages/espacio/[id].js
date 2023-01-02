@@ -26,7 +26,7 @@ function Page({ data }) {
     const JSONdata = JSON.stringify(data)
 
     // direccion de la api para guardar
-    const url = 'http://146.83.198.35:1095/api/Espacio/update/'+id
+    const url = 'http://146.83.198.35:1095/api/Espacios/update/'+id
 
     // opciones de envio
     const options = {
@@ -98,7 +98,7 @@ function Page({ data }) {
 export async function getServerSideProps(context) {
   const id= context.query.id
   // direccion de la api para guardar
-  const url = 'http://146.83.198.35:1095/api/Espacios/'+id
+  const url = 'http://146.83.198.35:1095/api/Espacios/search/'+id
 
   // opciones de envio
   const options = {
