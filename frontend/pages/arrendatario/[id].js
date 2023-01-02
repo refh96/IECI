@@ -1,55 +1,54 @@
-import Head from 'next/head'
-import { Inter } from '@next/font/google'
-import { useRouter } from 'next/router'
+import Head from "next/head";
+import { Inter } from "@next/font/google";
+import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 function Page({ data }) {
-  const router = useRouter()
-  const id  = router.query.id
+  const router = useRouter();
+  const id = router.query.id;
 
   const handleSubmit = async (event) => {
     //Para el evento submit
-    event.preventDefault()
+    event.preventDefault();
 
     //Paso el elemento que genera el evento (el formulario)
-    let formulario = event.target; 
+    let formulario = event.target;
     //Creo un objeto con los datos del formulario.
     const data = {
-      "nombre":formulario.nombre.value,
-      "apellido":formulario.apellido.value,
-      "numero":formulario.numero.value,
-      "correo":formulario.correo.value,
-      "status":formulario.status.value
-    }
+      nombre: formulario.nombre.value,
+      apellido: formulario.apellido.value,
+      numero: formulario.numero.value,
+      correo: formulario.correo.value,
+      status: formulario.status.value,
+    };
 
     // paso el onjeto a formato Json
-    const JSONdata = JSON.stringify(data)
+    const JSONdata = JSON.stringify(data);
 
     // direccion de la api para guardar
-    const url = 'http://146.83.198.35:1095/api/Arrendatarios/update/'+id
+    const url = "http://localhost/api/arrendatarios/update/" + id;
 
     // opciones de envio
     const options = {
       // Metodo post
-      method: 'PUT',
+      method: "PUT",
       // en formato JSON
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       // El cuerpo(body) enviado es el objeto Json
       body: JSONdata,
-    }
+    };
 
     // Envio infoirmacion y espero respuesta
-    const response = await fetch(url, options)
+    const response = await fetch(url, options);
 
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json()
-    alert(`Is this your full name: ${result}`)
-    router.back()
-  }
+
+    const result = await response.json();
+    alert(`Is this your full name: ${result}`);
+    router.back();
+  };
 
   return (
     <>
@@ -64,64 +63,89 @@ function Page({ data }) {
           <div className="card-header">
             <h3>Crear Arrendatario</h3>
           </div>
-          <form  onSubmit={handleSubmit} > 
-          <div className="card-body">           
-            <div className="mb-3">
+          <form onSubmit={handleSubmit}>
+            <div className="card-body">
+              <div className="mb-3">
                 <label className="form-label">Nombre</label>
-                <input type="text" name="nombre" className="form-control" defaultValue={data.nombre}/>
-            </div>         
-            <div className="mb-3">
+                <input
+                  type="text"
+                  name="nombre"
+                  className="form-control"
+                  defaultValue={data.nombre}
+                />
+              </div>
+              <div className="mb-3">
                 <label className="form-label">apellido</label>
-                <input type="text" name="apellido" className="form-control" defaultValue={data.apellido}/>
-            </div>         
-            <div className="mb-3">
+                <input
+                  type="text"
+                  name="apellido"
+                  className="form-control"
+                  defaultValue={data.apellido}
+                />
+              </div>
+              <div className="mb-3">
                 <label className="form-label">Numero</label>
-                <input type="number" name="numero" className="form-control" defaultValue={data.numero}/>
-            </div>         
-            <div className="mb-3">
+                <input
+                  type="number"
+                  name="numero"
+                  className="form-control"
+                  defaultValue={data.numero}
+                />
+              </div>
+              <div className="mb-3">
                 <label className="form-label">Correo</label>
-                <input type="email" name="correo" className="form-control" defaultValue={data.correo}/>
-            </div>         
-            <div className="mb-3">
+                <input
+                  type="email"
+                  name="correo"
+                  className="form-control"
+                  defaultValue={data.correo}
+                />
+              </div>
+              <div className="mb-3">
                 <label className="form-label">Status</label>
-                <select name="status" className="form-select"  defaultValue={data.status}>
-                    <option>Permitido</option>
-                    <option>Bloqueado</option>
+                <select
+                  name="status"
+                  className="form-select"
+                  defaultValue={data.status}
+                >
+                  <option>Permitido</option>
+                  <option>Bloqueado</option>
                 </select>
+              </div>
             </div>
-          </div>
-          <div className="card-footer">
-              <button className="btn btn-success w-100" type="submit">Enviar</button>
-          </div>
+            <div className="card-footer">
+              <button className="btn btn-success w-100" type="submit">
+                Enviar
+              </button>
+            </div>
           </form>
         </div>
       </main>
     </>
-  )
+  );
 }
 
 export async function getServerSideProps(context) {
-  const id= context.query.id
+  const id = context.query.id;
   // direccion de la api para guardar
-  const url = 'http://192.168.0.21:27017/api/arrendatario/search/'+id
+  const url = "http://localhost/api/arrendatarios/search/" + id;
 
   // opciones de envio
   const options = {
     // Metodo post
-    method: 'GET',
+    method: "GET",
     // en formato JSON
     headers: {
-      'Content-Type': 'application/json',
-    }
-  }
+      "Content-Type": "application/json",
+    },
+  };
 
   // Envio infoirmacion y espero respuesta
-  const response = await fetch(url, options)
+  const response = await fetch(url, options);
 
-  // Get the response data from server as JSON.
-  // If server returns the name submitted, that means the form works.
-  const data = await response.json()
-  return { props: {data} }
+
+  const data = await response.json();
+  return { props: { data } };
 }
 
-export default Page
+export default Page;

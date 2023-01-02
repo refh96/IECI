@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export async function getServerSideProps(context) {
 
   // direccion de la api para guardar
-  const url = 'http://146.83.198.35:1095/api/Arrendatarios'
+  const url = 'http://localhost/api/arrendatarios'
 
   // opciones de envio
   const options = {
@@ -36,7 +36,7 @@ function Page({ data }) {
 
   async function statusChange(id){
     // direccion de la api para guardar
-    const url = 'http://146.83.198.35:1095/api/Arrendatarios/status/'+id
+    const url = 'http://localhost/api/arrendatarios/status/'+id
 
     // opciones de envio
     const options = {
