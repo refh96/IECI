@@ -19,7 +19,7 @@ export default function Home() {
             <Image src = 'https://www.pasteneyrojo.cl/configuraciones/imagen/noticia/noticia/95/imagen/039442431d09daa840ba04cdbfe67b94/type/detalle/' alt = 'Espacios'/>
           </Center>
           <Button colorScheme='red' onClick = {()=>router.push('/admin')}>Administrador</Button>
-          <Button colorScheme='blue' onClick = {()=>router.push('/usuario')}>Usuario</Button>
+          <Button colorScheme='blue' onClick = {()=>router.push('/ingreso')}>Usuario</Button>
         </Stack>
     </Container>
     </> )

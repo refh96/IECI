@@ -1,5 +1,4 @@
-import { useState} from 'react'
-import { Inter } from '@next/font/google'
+import { useState } from 'react'
 import axios from 'axios'
 import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
 
@@ -32,6 +31,8 @@ const crearArrendatario = () =>{
       console.log('data mandada')
     })
   }
+
+  
 
   return (
     <Container maxW="container.xl" mt={10}>
