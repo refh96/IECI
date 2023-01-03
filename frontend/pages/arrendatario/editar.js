@@ -1,33 +1,33 @@
 import { useState } from 'react'
 import axios from 'axios'
-import {Button, Container, Heading, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
+import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
 
-const crearEspacio = () =>{
-  const [espacio, setEspacio] = useState({
+const editarArrendatario = () =>{
+  const [arrendatario, setArrendatario] = useState({
     nombre: '',
-    aforo: 0,
-    descripcion: '',
-    tiempoMáximoDeArriendo: 0,
+    apellido: '',
+    número: 0,
+    correo: '',
     status: 'Permitido'
   })
   
-  console.log(espacio)
+  console.log(arrendatario)
 
   const handleChange = (e) => {
-    setEspacio({
-      ...espacio,
+    setArrendatario({
+      ...arrendatario,
       [e.target.name]:e.target.value
     })
   }
 
-  const createEspacio = async (espacio) =>{
-    const response = await axios.post(`${process.env.SERVIDOR}/espacio`, espacio)
+  const createArrendatario = async (arrendatario) =>{
+    const response = await axios.post(`${process.env.SERVIDOR}/arrendatario`, arrendatario)
     return response
   }
 
-  const submitEspacio = (e) => {
+  const submitArrendatario = (e) => {
     e.preventDefault()
-    createEspacio(espacio).then(res => {
+    createArrendatario(arrendatario).then(res => {
       console.log('data mandada')
     })
   }
@@ -64,23 +64,23 @@ const crearEspacio = () =>{
         </div>
       </nav>
     <Container maxW="container.xl" mt={10}>
-      <Heading size="2xl" textAlign={"center"}>Crear Espacio</Heading>
+      <Heading size="2xl" textAlign={"center"}>Editar Arrendatario</Heading>
       <Stack spacing={4} mt ={10}>
         <FormControl id = 'nombre'>
           <FormLabel>Nombre</FormLabel>
           <Input type="text" placeholder="Nombre" name = "nombre" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'apellido'>
-          <FormLabel>Aforo</FormLabel>
-          <Input type="text" placeholder="Aforo" name = "aforo" onChange={handleChange}/>
+          <FormLabel>Apellido</FormLabel>
+          <Input type="text" placeholder="Apellido" name = "apellido" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'numero'>
-          <FormLabel>Descripción</FormLabel>
-          <Input type="text" placeholder="Numero" name = "descripcion" onChange={handleChange}/>
+          <FormLabel>Numero</FormLabel>
+          <Input type="number" placeholder="Numero" name = "número" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'correo'>
-          <FormLabel>Tiempo Máximo de Arriendo en Horas</FormLabel>
-          <Input type = "number" name = "tiempoMáximoDeArriendo" onChange={handleChange}/>
+          <FormLabel>Correo</FormLabel>
+          <Input type="text" placeholder="Correo" name = "correo" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'status'>
           <Select name = 'status' onChange={handleChange}>
@@ -89,10 +89,10 @@ const crearEspacio = () =>{
           </Select>
         </FormControl>
       </Stack>
-      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitEspacio}>Crear</Button>
+      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitArrendatario}>editar</Button>
     </Container>
     </>
   )
 }
 
-export default crearEspacio
+export default editarArrendatario

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import {Button, Container, Heading, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
 
-const crearEspacio = () =>{
+const editarEspacio = () =>{
   const [espacio, setEspacio] = useState({
     nombre: '',
     aforo: 0,
@@ -20,14 +20,14 @@ const crearEspacio = () =>{
     })
   }
 
-  const createEspacio = async (espacio) =>{
+  const getEspacio = async (espacio) =>{
     const response = await axios.post(`${process.env.SERVIDOR}/espacio`, espacio)
     return response
   }
 
   const submitEspacio = (e) => {
     e.preventDefault()
-    createEspacio(espacio).then(res => {
+    getEspacio(espacio).then(res => {
       console.log('data mandada')
     })
   }
@@ -64,7 +64,7 @@ const crearEspacio = () =>{
         </div>
       </nav>
     <Container maxW="container.xl" mt={10}>
-      <Heading size="2xl" textAlign={"center"}>Crear Espacio</Heading>
+      <Heading size="2xl" textAlign={"center"}>editar Espacio</Heading>
       <Stack spacing={4} mt ={10}>
         <FormControl id = 'nombre'>
           <FormLabel>Nombre</FormLabel>
@@ -89,10 +89,10 @@ const crearEspacio = () =>{
           </Select>
         </FormControl>
       </Stack>
-      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitEspacio}>Crear</Button>
+      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitEspacio}>editar</Button>
     </Container>
     </>
   )
 }
 
-export default crearEspacio
+export default editarEspacio

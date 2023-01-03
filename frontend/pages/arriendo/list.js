@@ -33,8 +33,8 @@ const listarArriendo = () => {
                     <Td>{checkNom(arriendo.espacio)}</Td>
                     <Td>{getFecha(arriendo.fecha_inicio)}</Td>
                     <Td>{getFecha(arriendo.fecha_fin)}</Td>
-                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arriendo._id}`)}>Edit</Button>
-                    <Button colorScheme='red' onClick={useEffect(()=> {deleteArriendo(arriendo._id)},[])}>Borrar</Button>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./editar`)}>Edit</Button>
+
                 </Tr>
             )
         }))
@@ -48,6 +48,34 @@ const listarArriendo = () => {
     console.log(arriendos)
 
     return (
+        <>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            inicio
+          </a>
+          <a className="navbar-brand" href="../usuario">
+            usuario
+          </a>
+          <a className="navbar-brand" href="../admin">
+            admin
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ml-auto"></ul>
+          </div>
+        </div>
+      </nav>
         <Container maxW='container.xl'>
             <Heading as='h1' size = '2xl' textAlign='center' mt = '10' color = 'blue.400'> Listado de Arriendos </Heading>
             <Stack spacing = {4} mt = '10'>
@@ -66,6 +94,7 @@ const listarArriendo = () => {
             </Table>
             </Stack>
         </Container>
+        </>
     )
 }
 

@@ -4,7 +4,7 @@ import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel
 import { useRouter } from 'next/router'
 
 
-const crearArriendo = () =>{
+const editarArriendo = () =>{
 
   const router = useRouter()
 
@@ -29,14 +29,14 @@ const crearArriendo = () =>{
     })
   }
 
-  const createArriendo = async (arriendo) =>{
+  const getArriendo = async (arriendo) =>{
     const response = await axios.post(`${process.env.SERVIDOR}/arriendo`, arriendo)
     return response
   }
 
   const submitArriendo = (e) => {
     e.preventDefault()
-    createArriendo(arriendo).then(res => {
+    getArriendo(arriendo).then(res => {
       console.log('data mandada')
     })
     router.push('./list')
@@ -94,7 +94,7 @@ const crearArriendo = () =>{
         </div>
       </nav>
     <Container maxW="container.xl" mt={10}>
-      <Heading size="2xl" textAlign={"center"}>Arrendar</Heading>
+      <Heading size="2xl" textAlign={"center"}>Editar Arriendo</Heading>
       <Stack spacing={4} mt ={10}>
         <FormControl id = 'fecha_inicio'>
           <FormLabel>Fecha de Inicio</FormLabel>
@@ -121,10 +121,10 @@ const crearArriendo = () =>{
           </Select>
         </FormControl>
       </Stack>
-      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitArriendo}>Crear</Button>
+      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitArriendo}>editar</Button>
     </Container>
     </>
   )
 }
 
-export default crearArriendo
+export default editarArriendo

@@ -35,6 +35,34 @@ const crearArrendatario = () =>{
   
 
   return (
+    <>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            inicio
+          </a>
+          <a className="navbar-brand" href="../usuario">
+            usuario
+          </a>
+          <a className="navbar-brand" href="../admin">
+            admin
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ml-auto"></ul>
+          </div>
+        </div>
+      </nav>
     <Container maxW="container.xl" mt={10}>
       <Heading size="2xl" textAlign={"center"}>Crear Arrendatario</Heading>
       <Stack spacing={4} mt ={10}>
@@ -63,6 +91,7 @@ const crearArrendatario = () =>{
       </Stack>
       <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitArrendatario}>Crear</Button>
     </Container>
+    </>
   )
 }
 
