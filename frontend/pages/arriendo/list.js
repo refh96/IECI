@@ -15,7 +15,8 @@ const listarArriendo = () => {
         setArriendos(response.data)
     }
 
-   
+    const checkNom = (st) => st !== null ? st.nombre : null
+    const checkAp = (st) => st != null ? st.nombre : null
 
     const contentTable = () => {
         return arriendos.map((arriendo => {
@@ -25,7 +26,8 @@ const listarArriendo = () => {
                     <Td>{checkNom(arriendo.espacio)}</Td>
                     <Td>{getFecha(arriendo.fecha_inicio)}</Td>
                     <Td>{getFecha(arriendo.fecha_fin)}</Td>
-                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arriendo._id}`)}>Edit</Button>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arriendo._id}`)}>Editar</Button>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./borrar/${arriendo._id}`)}>Borrar</Button>
                 </Tr>
             )
         }))

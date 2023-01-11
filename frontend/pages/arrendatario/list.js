@@ -23,7 +23,7 @@ const listarArriendo = () => {
                     <Td>{arrendatario.número}</Td>
                     <Td>{arrendatario.correo}</Td>
                     <Td>{arrendatario.status}</Td>
-                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arrendatario._id}`)}>Edit</Button>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arrendatario._id}`)}>Editar</Button>
                     <Button colorScheme='red' onClick={()=>router.push(`./borrar/${arrendatario._id}`)}>Borrar</Button>
                 </Tr>
             )

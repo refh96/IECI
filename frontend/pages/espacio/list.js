@@ -24,7 +24,7 @@ const listarEspacio = () => {
                     <Td>{espacio.descripcion}</Td>
                     <Td>{espacio.tiempoMaximoDeArriendo}</Td>
                     <Td>{espacio.status}</Td>
-                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${espacio._id}`)}>Edit</Button>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${espacio._id}`)}>Editar</Button>
                     <Button colorScheme='red' onClick={()=>router.push(`./borrar/${espacio._id}`)}>Borrar</Button>
                 </Tr>
             )

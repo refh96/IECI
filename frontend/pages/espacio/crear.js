@@ -53,7 +53,7 @@ const crearEspacio = () =>{
         </FormControl>
         <FormControl id = 'numero'>
           <FormLabel>Descripción</FormLabel>
-          <Input type="text" placeholder="Numero" name = "descripcion" onChange={handleChange}/>
+          <Input type="text" placeholder="Descripción" name = "descripcion" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'correo'>
           <FormLabel>Tiempo Máximo de Arriendo en Horas</FormLabel>
