@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Container, Stack, Heading, Tr, Td, Thead, Table, Tbody, Button} from '@chakra-ui/react'
 import axios from 'axios'
-import getFecha from '../../auxiliar/fecha'
 import { useRouter } from 'next/router'
 
 const listarArriendo = () => {

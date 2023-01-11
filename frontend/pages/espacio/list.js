@@ -1,52 +1,54 @@
 import { useState, useEffect } from 'react'
 import { Container, Stack, Heading, Tr, Td, Thead, Table, Tbody, Button} from '@chakra-ui/react'
 import axios from 'axios'
-import getFecha from '../../auxiliar/fecha'
 import { useRouter } from 'next/router'
 
-const listarArriendo = () => {
+const listarEspacio = () => {
 
     const router = useRouter()
 
-    const [arriendos, setArriendos] = useState([])
+    const [espacios, setEspacios] = useState([])
     
-    const getArriendos = async () => {
-        const response = await axios.get(`${process.env.SERVIDOR}/arriendos`)
-        setArriendos(response.data)
+    const getEspacios = async () => {
+        const response = await axios.get(`${process.env.SERVIDOR}/espacios`)
+        setEspacios(response.data)
     }
 
 
     const contentTable = () => {
-        return arriendos.map((arriendo => {
+        return espacios.map((espacio => {
             return (
-                <Tr key={arriendo._id}>
-                    <Td>{checkNom(arriendo.arrendatario) + ' ' + checkAp(arriendo.arrendatario)}</Td>
-                    <Td>{checkNom(arriendo.espacio)}</Td>
-                    <Td>{getFecha(arriendo.fecha_inicio)}</Td>
-                    <Td>{getFecha(arriendo.fecha_fin)}</Td>
-                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arriendo._id}`)}>Edit</Button>
+                <Tr key={espacio._id}>
+                    <Td>{espacio.nombre}</Td>
+                    <Td>{espacio.aforo}</Td>
+                    <Td>{espacio.descripcion}</Td>
+                    <Td>{espacio.tiempoMaximoDeArriendo}</Td>
+                    <Td>{espacio.status}</Td>
+                    <Button colorScheme='blue' onClick={()=>router.push(`./edit/${espacio._id}`)}>Edit</Button>
+                    <Button colorScheme='red' onClick={()=>router.push(`./borrar/${espacio._id}`)}>Borrar</Button>
                 </Tr>
             )
         }))
     }
 
     useEffect(() => {
-        getArriendos()
+        getEspacios()
     }, [])
 
-    console.log(arriendos)
+    console.log(espacios)
 
     return (
         <Container maxW='container.xl'>
-            <Heading as='h1' size = '2xl' textAlign='center' mt = '10' color = 'blue.400'> Listado de Arriendos </Heading>
+            <Heading as='h1' size = '2xl' textAlign='center' mt = '10' color = 'blue.400'> Listado de Espacios </Heading>
             <Stack spacing = {4} mt = '10'>
             <Table variant="simple">
                 <Thead>
                     <Tr>
-                        <Td>Arrendatario</Td>
-                        <Td>Espacio</Td>
-                        <Td>Fecha Inicio</Td>
-                        <Td>Fecha Fin</Td>
+                        <Td>Nombre</Td>
+                        <Td>Aforo</Td>
+                        <Td>Descripción</Td>
+                        <Td>Tiempo Máximo de Arriendo</Td>
+                        <Td>Status</Td>
                     </Tr>
                 </Thead>
                 <Tbody>
@@ -58,4 +60,4 @@ const listarArriendo = () => {
     )
 }
 
-export default listarArriendo
+export default listarEspacio
