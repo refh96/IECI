@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import axios from 'axios'
-import {Button, Container, Heading, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
+import {Button, Container, Heading, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 const crearEspacio = () =>{
+
+  const router = useRouter()
+
   const [espacio, setEspacio] = useState({
     nombre: '',
     aforo: 0,
     descripcion: '',
-    tiempoMáximoDeArriendo: 0,
-    status: 'Permitido'
+    tiempoMaximoDeArriendo: 0,
+    status: 'Disponible'
   })
   
   console.log(espacio)
@@ -29,6 +33,7 @@ const crearEspacio = () =>{
     e.preventDefault()
     createEspacio(espacio).then(res => {
       console.log('data mandada')
+      router.push('./list')
     })
   }
 
@@ -44,7 +49,7 @@ const crearEspacio = () =>{
         </FormControl>
         <FormControl id = 'apellido'>
           <FormLabel>Aforo</FormLabel>
-          <Input type="text" placeholder="Aforo" name = "aforo" onChange={handleChange}/>
+          <Input type="number" placeholder="Aforo" name = "aforo" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'numero'>
           <FormLabel>Descripción</FormLabel>
@@ -52,12 +57,12 @@ const crearEspacio = () =>{
         </FormControl>
         <FormControl id = 'correo'>
           <FormLabel>Tiempo Máximo de Arriendo en Horas</FormLabel>
-          <Input type = "number" name = "tiempoMáximoDeArriendo" onChange={handleChange}/>
+          <Input type = "number" name = "tiempoMaximoDeArriendo" onChange={handleChange}/>
         </FormControl>
         <FormControl id = 'status'>
           <Select name = 'status' onChange={handleChange}>
-            <option value='Permitido'>Permitido</option>
-            <option value='Bloqueado'>Bloqueado</option>
+            <option value='Disponible'>Disponible</option>
+            <option value='En Mantenimiento'>En Mantenimiento</option>
           </Select>
         </FormControl>
       </Stack>

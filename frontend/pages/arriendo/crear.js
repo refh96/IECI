@@ -38,8 +38,8 @@ const crearArriendo = () =>{
     e.preventDefault()
     createArriendo(arriendo).then(res => {
       console.log('data mandada')
-    })
-    router.push('./list')
+      router.push('./list')
+    }).catch(console.error('error de axios'))
 
   }
 
@@ -54,7 +54,7 @@ const crearArriendo = () =>{
   const contentTable = () => {
     return espacios.map((espacio => {
         return (
-          <option value = {espacio.id}>{espacio.nombre}</option>
+          <option value = {espacio._id}>{espacio.nombre}</option>
         )
     }))
   }

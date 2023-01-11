@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import axios from 'axios'
-import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
+import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel, Select, InputGroup, InputLeftAddon} from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 const crearArrendatario = () =>{
+
+  const router = useRouter()
+
   const [arrendatario, setArrendatario] = useState({
     nombre: '',
     apellido: '',
@@ -29,6 +33,7 @@ const crearArrendatario = () =>{
     e.preventDefault()
     createArrendatario(arrendatario).then(res => {
       console.log('data mandada')
+      router.push('./list')
     })
   }
 
@@ -48,7 +53,10 @@ const crearArrendatario = () =>{
         </FormControl>
         <FormControl id = 'numero'>
           <FormLabel>Numero</FormLabel>
-          <Input type="number" placeholder="Numero" name = "número" onChange={handleChange}/>
+          <InputGroup>
+            <InputLeftAddon children = '+56'></InputLeftAddon>
+            <Input type="number" placeholder="Numero" name = "número" onChange={handleChange}/>
+          </InputGroup>
         </FormControl>
         <FormControl id = 'correo'>
           <FormLabel>Correo</FormLabel>
@@ -65,6 +73,7 @@ const crearArrendatario = () =>{
     </Container>
   )
 }
+
 
 export default crearArrendatario
 

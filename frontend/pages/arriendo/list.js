@@ -4,7 +4,6 @@ import axios from 'axios'
 import getFecha from '../../auxiliar/fecha'
 import { useRouter } from 'next/router'
 
-
 const listarArriendo = () => {
 
     const router = useRouter()
@@ -16,14 +15,7 @@ const listarArriendo = () => {
         setArriendos(response.data)
     }
 
-    const checkNom = (a) => {return a !== null ? a.nombre : null}
-    const checkAp = (a) => {return a !== null ? a.apellido: null}
-
-    const deleteArriendo = async (id) => {
-        const response = await axios.delete(`${process.env.SERVIDOR}/arriendo/delete/${id}`)
-        return response
-    }
-
+   
 
     const contentTable = () => {
         return arriendos.map((arriendo => {
@@ -34,7 +26,6 @@ const listarArriendo = () => {
                     <Td>{getFecha(arriendo.fecha_inicio)}</Td>
                     <Td>{getFecha(arriendo.fecha_fin)}</Td>
                     <Button colorScheme='blue' onClick={()=>router.push(`./edit/${arriendo._id}`)}>Edit</Button>
-                    <Button colorScheme='red' onClick={useEffect(()=> {deleteArriendo(arriendo._id)},[])}>Borrar</Button>
                 </Tr>
             )
         }))
@@ -44,7 +35,6 @@ const listarArriendo = () => {
         getArriendos()
     }, [])
 
-   
     console.log(arriendos)
 
     return (
