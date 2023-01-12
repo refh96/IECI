@@ -16,36 +16,61 @@
             "type":"String",
             "required": true
         },
-        "status": {
-            "type": "Schema.ObjectID",
-            "ref": "Status"
-        }
-    },
-    "status": {
-        "name": {
+        "status":{
             "type": "String",
             "required": true,
-            "minLength": 1,
-            "maxLength": 100,
             "enum": [
-                "active",
-                "inactive"
+                "Permitido",
+                "Bloqueado"
             ]
         }
     },
 
-    "espacios":{
+    "Espacio":{
         "nombre":{
             "type":"String",
             "require":true
         },
-        "cantidad":{
+        "aforo":{
             "type":"Number",
             "require":true
         },
         "description":{
             "type":"String",
             "require":true
+        },
+        "tiempoMaximoDeArriendo":{
+            "type":"Number",
+            "require":true
+        },
+        "status":{
+            "type": "String",
+            "required": true,
+            "enum": [
+                "Disponible",
+                "En Mantenimiento"
+            ]
+        }
+    },
+
+    "Arriendo":{
+        "fecha_inicio":{
+            "type": "Date",
+            "required": true
+        },
+        "fecha_fin":{
+            "type": "Date",
+            "required": true
+        },
+        "arrendatario":{
+            "type": "Schema.ObjectId",
+            "required": true,
+            "ref": "arrendatario"
+        },
+        "espacio":{
+            "type": "Schema.ObjectId",
+            "required": true,
+            "ref": "espacio"
         }
     }
 }
