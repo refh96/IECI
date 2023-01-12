@@ -2,9 +2,9 @@ import { useState , useEffect} from 'react'
 import axios from 'axios'
 import {Button, Container, Heading, HStack, Input, Stack, FormControl, FormLabel, Select} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import Swal from 'sweetalert2'
 
-const crearArriendo = () =>{
+
+const editarArriendo = () =>{
 
   const router = useRouter()
 
@@ -22,47 +22,24 @@ const crearArriendo = () =>{
   
   console.log(arriendo)
 
-  const [formValid, setFormValid] = useState(false)
-
-  function handleChange(e) {
+  const handleChange = (e) => {
     setArriendo({
       ...arriendo,
       [e.target.name]:e.target.value
     })
-    const { fecha_inicio, fecha_fin } = arriendo;
-    if (fecha_inicio && fecha_fin ) {
-      setFormValid(true);
-    }
   }
 
-  function handleSubmit(e) {
-
-  try {
-    Swal.fire({
-      title: 'Arrendatario creado',
-      text: 'El registro se ha creado exitosamente',
-      icon: 'success'
-    })
-  } catch (error) {
-    Swal.fire({
-      title: 'Error',
-      text: error.message,
-      icon: 'error',
-    })
-  }
-}
-
-  const createArriendo = async (arriendo) =>{
+  const getArriendo = async (arriendo) =>{
     const response = await axios.post(`${process.env.SERVIDOR}/arriendo`, arriendo)
     return response
   }
 
   const submitArriendo = (e) => {
-    
-    createArriendo(arriendo).then(res => {
+    e.preventDefault()
+    getArriendo(arriendo).then(res => {
       console.log('data mandada')
-      router.push('./list')
-    }).catch(console.error('error de axios'))
+    })
+    router.push('./list')
 
   }
 
@@ -77,7 +54,7 @@ const crearArriendo = () =>{
   const contentTable = () => {
     return espacios.map((espacio => {
         return (
-          <option value = {espacio._id}>{espacio.nombre}</option>
+          <option value = {espacio.id}>{espacio.nombre}</option>
         )
     }))
   }
@@ -88,8 +65,36 @@ const crearArriendo = () =>{
   
 
   return (
+    <>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <a className="navbar-brand" href="/">
+            inicio
+          </a>
+          <a className="navbar-brand" href="../usuario">
+            usuario
+          </a>
+          <a className="navbar-brand" href="../admin">
+            admin
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ml-auto"></ul>
+          </div>
+        </div>
+      </nav>
     <Container maxW="container.xl" mt={10}>
-      <Heading size="2xl" textAlign={"center"}>Arrendar</Heading>
+      <Heading size="2xl" textAlign={"center"}>Editar Arriendo</Heading>
       <Stack spacing={4} mt ={10}>
         <FormControl id = 'fecha_inicio'>
           <FormLabel>Fecha de Inicio</FormLabel>
@@ -116,22 +121,10 @@ const crearArriendo = () =>{
           </Select>
         </FormControl>
       </Stack>
-      <Button colorScheme='blue' mt={10} mb={10} onClick={() => {
-  if (!formValid) {
-    Swal.fire({
-      title: 'Error',
-      text: 'Debes llenar todos los campos',
-      icon: 'error',
-    });
-  } else {
-    submitArriendo();
-    handleSubmit();
-  }
-}}>
-  Crear
-</Button>
+      <Button colorScheme='blue' mt = {10} mb = {10} onClick={submitArriendo}>editar</Button>
     </Container>
+    </>
   )
 }
 
-export default crearArriendo
+export default editarArriendo
