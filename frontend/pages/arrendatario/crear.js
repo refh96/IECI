@@ -67,7 +67,7 @@ const crearArrendatario = () =>{
                   <Input type="number" placeholder="Numero" name = "número" onChange={handleChange} onBlur={handleBlur} value = {values.numero}/>
                 </InputGroup>
                 {touched.número && errors.número && (
-                  <p>{errors.número}</p>,
+                  <p>{errors.número}</p>
                 )}
               </FormControl>
               <FormControl id = 'correo'>
