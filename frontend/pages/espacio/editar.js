@@ -7,7 +7,7 @@ const editarEspacio = () =>{
     nombre: '',
     aforo: 0,
     descripcion: '',
-    tiempoMáximoDeArriendo: 0,
+    tiempoMaximoDeArriendo: 0,
     status: 'Permitido'
   })
   
