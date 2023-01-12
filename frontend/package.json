@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 {
   "name": "frontend",
   "version": "0.1.0",
@@ -28,32 +28,3 @@
     "yup": "^0.32.11"
   }
 }
-=======
-{
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@chakra-ui/react": "^2.4.6",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@next/font": "13.0.7",
-    "axios": "^1.2.2",
-    "bootstrap": "^5.2.3",
-    "eslint": "8.30.0",
-    "eslint-config-next": "13.0.7",
-    "formik": "^2.2.9",
-    "framer-motion": "^8.0.2",
-    "next": "13.0.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "yup": "^0.32.11"
-  }
-}
->>>>>>> 1046fdaa2324401147a7f39448425ab6a9c6e78a
